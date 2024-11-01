@@ -12,98 +12,97 @@ def test_single_roll(bowling):
     assert 5 == bowling.score()
 
 
-# func (suite *BowlingTestSuite) Test_TwoRolls() {
-# 	bowling.Roll(5)
-# 	bowling.Roll(5)
-# 	assert.Equal(suite.T(), 10, bowling.Score())
-# }
+def test_two_rolls(bowling):
+    bowling.roll(5)
+    bowling.roll(3)
+    assert 8 == bowling.score()
 
-# func (suite *BowlingTestSuite) Test_WithStrikeAndFollowUpRolls() {
-# 	bowling.Roll(10)
-# 	bowling.Roll(4)
-# 	bowling.Roll(3)
-# 	assert.Equal(suite.T(), 24, bowling.Score())
-# }
 
-# func (suite *BowlingTestSuite) Test_WithStrikeAndWithSingleFollowUpRoll() {
-# 	bowling.Roll(10)
-# 	bowling.Roll(4)
-# 	assert.Equal(suite.T(), 18, bowling.Score())
-# }
+def test_with_strike_and_follow_up_rolls(bowling):
+    bowling.roll(10)
+    bowling.roll(4)
+    bowling.roll(3)
+    assert 24 == bowling.score()
 
-# func (suite *BowlingTestSuite) Test_WithStrikeAndWithNoFollowUpRoll() {
-# 	bowling.Roll(10)
-# 	assert.Equal(suite.T(), 10, bowling.Score())
-# }
 
-# func (suite *BowlingTestSuite) Test_WithSpareAndFollowUpRoll() {
-# 	bowling.Roll(4)
-# 	bowling.Roll(6)
-# 	bowling.Roll(3)
-# 	assert.Equal(suite.T(), 16, bowling.Score())
-# }
+def test_with_strike_and_with_single_follow_up_roll(bowling):
+    bowling.roll(10)
+    bowling.roll(4)
+    assert 18 == bowling.score()
 
-# func (suite *BowlingTestSuite) Test_WithSpareNoFollowUpRoll() {
-# 	bowling.Roll(4)
-# 	bowling.Roll(6)
-# 	assert.Equal(suite.T(), 10, bowling.Score())
-# }
+
+def test_with_strike_and_with_no_follow_up_roll(bowling):
+    bowling.roll(10)
+    assert 10 == bowling.score()
+
+
+def test_with_spare_and_follow_up_roll(bowling):
+    bowling.roll(4)
+    bowling.roll(6)
+    bowling.roll(3)
+    assert 16 == bowling.score()
+
+
+def test_with_spare_no_follow_up_roll(bowling):
+    bowling.roll(4)
+    bowling.roll(6)
+    assert 10 == bowling.score()
+
 
 # func (suite *BowlingTestSuite) Test_WithFullGame() {
-# 	bowling.Roll(10)
-# 	bowling.Roll(4)
-# 	bowling.Roll(3)
-# 	bowling.Roll(8)
-# 	bowling.Roll(2)
-# 	bowling.Roll(10)
-# 	bowling.Roll(8)
-# 	bowling.Roll(1)
-# 	bowling.Roll(3)
-# 	bowling.Roll(3)
-# 	bowling.Roll(10)
-# 	bowling.Roll(10)
-# 	bowling.Roll(10)
-# 	bowling.Roll(6)
-# 	bowling.Roll(3)
-# 	assert.Equal(suite.T(), 162, bowling.Score())
-# }
+def test_with_full_game(bowling):
+    # First frame
+    bowling.roll(10)
+    # second frame
+    bowling.roll(4)
+    bowling.roll(3)
+    # third frame
+    bowling.roll(8)
+    bowling.roll(2)
+    # fourth frame
+    bowling.roll(10)
+    # fifth frame
+    bowling.roll(8)
+    bowling.roll(1)
+    # sixth frame
+    bowling.roll(3)
+    bowling.roll(3)
+    # seventh frame
+    bowling.roll(10)
+    # eighth frame
+    bowling.roll(10)
+    # ninth frame
+    bowling.roll(10)
+    # tenth frame
+    bowling.roll(6)
+    bowling.roll(3)
+    assert 162 == bowling.score()
 
-# func (suite *BowlingTestSuite) Test_WithAllStrikes() {
-# 	for i := 0; i < 12; i++ {
-# 		bowling.Roll(10)
-# 	}
 
-# 	assert.Equal(suite.T(), 300, bowling.Score())
-# }
+def test_with_all_strikes(bowling):
+    for i in range(12):
+        bowling.roll(10)
 
-# func (suite *BowlingTestSuite) Test_StrikeOnFinalFrame() {
-# 	for i := 0; i < 18; i++ {
-# 		bowling.Roll(1)
-# 	}
-# 	bowling.Roll(10)
-# 	bowling.Roll(10)
-# 	bowling.Roll(10)
+    assert 300 == bowling.score()
 
-# 	assert.Equal(suite.T(), 48, bowling.Score())
-# }
 
-# func (suite *BowlingTestSuite) Test_SpareOnFinalFrame() {
-# 	for i := 0; i < 18; i++ {
-# 		bowling.Roll(1)
-# 	}
-# 	bowling.Roll(6)
-# 	bowling.Roll(4)
-# 	bowling.Roll(3)
+def test_strike_on_final_frame(bowling):
+    for i in range(18):
+        bowling.roll(1)
 
-# 	assert.Equal(suite.T(), 31, bowling.Score())
-# }
+    bowling.roll(10)
+    bowling.roll(10)
+    bowling.roll(10)
 
-# func BenchmarkFullGame(b *testing.B) {
-# 	for i := 0; i < b.N; i++ {
-# 		bowling.StartNewGame()
-# 		for b := 0; b < 21; b++ {
-# 			bowling.Roll(i % 5)
-# 		}
-# 		bowling.Score()
-# 	}
-# }
+    assert 48 == bowling.score()
+
+
+def test_spare_on_final_frame(bowling):
+    for i in range(18):
+        bowling.roll(1)
+
+    bowling.roll(6)
+    bowling.roll(4)
+    bowling.roll(3)
+
+    assert 31 == bowling.score()
