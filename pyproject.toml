@@ -1,0 +1,25 @@
+[project]
+name = "bowling-python"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "Jorge Gueorguiev Garcia", email = "yefo.akira@twoormore.eu"},
+]
+dependencies = []
+requires-python = "==3.12.*"
+readme = "README.md"
+license = {text = "MIT"}
+
+
+[project.optional-dependencies]
+lsp = [
+    "pylsp-rope>=0.1.16",
+    "python-lsp-server[flake8,pylint]>=1.12.0",
+    "python-lsp-black>=2.0.0",
+    "python-lsp-isort>=0.2.0",
+]
+[tool.pdm]
+distribution = false
+
+[dependency-groups]
+dev = ["pylint>=3.3.1", "pytest>=8.3.3", "black>=24.10.0", "flake8>=7.1.1", "add-trailing-comma>=3.1.0", "isort>=5.13.2", "pytest-sugar>=1.0.0"]
