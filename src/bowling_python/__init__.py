@@ -28,9 +28,10 @@ class BowlingGameV1:
                 current_frame += 1
             else:
                 # spares can only happen with the second roll
-                if not new_frame and (pins + self.frames[i - 1] == 10):
-                    if len(self.frames) > (i + 1):
-                        total += self.frames[i + 1]
+                if not new_frame:
+                    if pins + self.frames[i - 1] == 10:
+                        if len(self.frames) > (i + 1):
+                            total += self.frames[i + 1]
 
                 new_frame = not new_frame
                 if new_frame:
