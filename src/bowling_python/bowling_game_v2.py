@@ -41,8 +41,11 @@ class BowlingGameV2:
         self.frames = []
 
     def roll(self, pins):
-        if len(self.frames) == 10:
+        if len(self.frames) == 10 and self.frames[-1].is_completed_frame:
             self.frames[-1].add_bonus_roll(pins)
+            if self.frames[-2].is_strike_frame:
+                if len(self.frames[-2].bonus_roll) < 2:
+                    self.frames[-2].add_bonus_roll(pins)
             return
 
         if len(self.frames) > 0:
