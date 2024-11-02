@@ -57,6 +57,13 @@ class BowlingGameV2:
             self.frames.append(Frame(pins))
 
         # We need to add bonus rolls
+        self._add_spare_bonus_roll(pins)
+
+        # For strikes, we need to check the two previous last rolls
+        self._add_strike_bonus_roll(1, pins)
+        self._add_strike_bonus_roll(2, pins)
+
+    def _add_spare_bonus_roll(self, pins):
         # For spares, first, there needs to be a Frame
         # second needs to be the first roll of the current_frame
         # as spare can have only one bonus roll
@@ -65,16 +72,11 @@ class BowlingGameV2:
                 if self.frames[-2].is_spare_frame:
                     self.frames[-2].add_bonus_roll(pins)
 
-        # For strikes, we need to check the two previous last rolls
-        if len(self.frames) > 1:
-            if self.frames[-2].is_strike_frame:
-                if len(self.frames[-2].bonus_roll) < 2:
-                    self.frames[-2].add_bonus_roll(pins)
-
-        if len(self.frames) > 2:
-            if self.frames[-3].is_strike_frame:
-                if len(self.frames[-3].bonus_roll) < 2:
-                    self.frames[-3].add_bonus_roll(pins)
+    def _add_strike_bonus_roll(self, frame, pins):
+        if len(self.frames) > frame:
+            if self.frames[-1 - frame].is_strike_frame:
+                if len(self.frames[-1 - frame].bonus_roll) < 2:
+                    self.frames[-1 - frame].add_bonus_roll(pins)
 
     def score(self):
         total = 0
